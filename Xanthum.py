@@ -83,12 +83,12 @@ while len(unprocessed_urls):
 """)
     soup = BeautifulSoup(response.text, 'lxml')
 
-   
+
     for anchor in soup.find_all("a"):
         link = anchor.attrs["href"] if "href" in anchor.attrs else ''
         if link.startswith('/'):
             link = base_url + link
         elif not link.startswith('http'):
             link = path + link
-        if not link in unprocessed_urls and not link in processed_urls:
+        if link not in unprocessed_urls and link not in processed_urls:
             unprocessed_urls.append(link)
